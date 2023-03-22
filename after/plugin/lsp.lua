@@ -20,6 +20,15 @@ lsp.configure('lua-language-server', {
     }
 })
 
+-- Setting up ccls
+lsp.configure('ccls', {
+  init_options = {
+    cache = {
+      directory = ".ccls-cache"
+    }
+  }
+})
+
 
 local cmp = require('cmp')
 local cmp_select = {behavior = cmp.SelectBehavior.Select}
