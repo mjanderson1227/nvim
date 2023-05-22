@@ -7,8 +7,7 @@ return require('packer').startup(function(use)
     -- Packer can manage itself
     use 'wbthomason/packer.nvim'
 
-    -- OneDark Theme
-    use 'navarasu/onedark.nvim'
+    use "rebelot/kanagawa.nvim"
 
     -- Telescope 
     use {
@@ -18,14 +17,14 @@ return require('packer').startup(function(use)
     }
 
     -- TreeSitter Highlighting & Parsing:
-    use('nvim-treesitter/nvim-treesitter', {run = ':TSUpdate'})
-    use('nvim-treesitter/playground')
+    use ('nvim-treesitter/nvim-treesitter', {run = ':TSUpdate'})
+    use ('nvim-treesitter/playground')
 
     -- Harpoon Directory Navigation
-    use('theprimeagen/harpoon')
+    use ('theprimeagen/harpoon')
 
     -- Undo Tree Change History
-    use('mbbill/undotree')
+    use ('mbbill/undotree')
 
     -- Vim Fugitive - Git Integration Plugin
     use('tpope/vim-fugitive')
@@ -104,9 +103,37 @@ return require('packer').startup(function(use)
     use "lukas-reineke/indent-blankline.nvim"
 
     -- Github copilot integration
-    use("github/copilot.vim") 
+    use("github/copilot.vim")
 
-    --  
-    
+    -- Toggleterm for terminal management
+    use {
+        "akinsho/toggleterm.nvim",
+        tag = '*',
+        config = function()
+            require("toggleterm").setup()
+        end
+    }
+
+    -- Vimtex for Latex
+    use 'lervag/vimtex'
+
+    -- Snipmate for snippets
+    use {
+        'garbas/vim-snipmate',
+        'honza/vim-snippets',
+        'tomtom/tlib_vim',
+        'MarcWeber/vim-addon-mw-utils',
+    }
+
+    -- Surrounding text with parenthesis
+    use {
+        "kylechui/nvim-surround",
+        tag = "*", -- Use for stability; omit to use `main` branch for the latest features
+        config = function()
+            require("nvim-surround").setup({
+                -- Default
+            })
+        end
+    }
 
 end)

@@ -30,3 +30,9 @@ vim.g.loaded_perl_provider = 0
 vim.g.loaded_ruby_provider = 0
 
 vim.opt.clipboard = "unnamed"
+
+vim.g.python3_host_prog = "/usr/bin/python3"
+
+vim.cmd("let g:snipMate = { 'snippet_version' : 1 }")
+
+vim.cmd("autocmd VimEnter * Copilot disable")
