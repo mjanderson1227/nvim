@@ -115,6 +115,11 @@ _G.packer_plugins = {
     path = "/Users/matthewanderson1/.local/share/nvim/site/pack/packer/start/copilot.vim",
     url = "https://github.com/github/copilot.vim"
   },
+  ["emmet-vim"] = {
+    loaded = true,
+    path = "/Users/matthewanderson1/.local/share/nvim/site/pack/packer/start/emmet-vim",
+    url = "https://github.com/mattn/emmet-vim"
+  },
   fd = {
     loaded = true,
     path = "/Users/matthewanderson1/.local/share/nvim/site/pack/packer/start/fd",
@@ -190,6 +195,11 @@ _G.packer_plugins = {
     path = "/Users/matthewanderson1/.local/share/nvim/site/pack/packer/start/nvim-treesitter",
     url = "https://github.com/nvim-treesitter/nvim-treesitter"
   },
+  ["nvim-treesitter-context"] = {
+    loaded = true,
+    path = "/Users/matthewanderson1/.local/share/nvim/site/pack/packer/start/nvim-treesitter-context",
+    url = "https://github.com/nvim-treesitter/nvim-treesitter-context"
+  },
   ["nvim-web-devicons"] = {
     loaded = false,
     needs_bufread = false,
@@ -200,6 +210,12 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/matthewanderson1/.local/share/nvim/site/pack/packer/start/onedark.nvim",
     url = "https://github.com/navarasu/onedark.nvim"
+  },
+  orgmode = {
+    config = { "\27LJ\2\n9\0\0\3\0\3\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0004\2\0\0B\0\2\1K\0\1\0\nsetup\forgmode\frequire\0" },
+    loaded = true,
+    path = "/Users/matthewanderson1/.local/share/nvim/site/pack/packer/start/orgmode",
+    url = "https://github.com/nvim-orgmode/orgmode"
   },
   ["packer.nvim"] = {
     loaded = true,
@@ -226,10 +242,21 @@ _G.packer_plugins = {
     path = "/Users/matthewanderson1/.local/share/nvim/site/pack/packer/start/rnvimr",
     url = "https://github.com/kevinhwang91/rnvimr"
   },
+  ["rust-tools.nvim"] = {
+    loaded = true,
+    path = "/Users/matthewanderson1/.local/share/nvim/site/pack/packer/start/rust-tools.nvim",
+    url = "https://github.com/simrat39/rust-tools.nvim"
+  },
   ["telescope.nvim"] = {
     loaded = true,
     path = "/Users/matthewanderson1/.local/share/nvim/site/pack/packer/start/telescope.nvim",
     url = "https://github.com/nvim-telescope/telescope.nvim"
+  },
+  ["toggleterm.nvim"] = {
+    config = { "\27LJ\2\n8\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\15toggleterm\frequire\0" },
+    loaded = true,
+    path = "/Users/matthewanderson1/.local/share/nvim/site/pack/packer/start/toggleterm.nvim",
+    url = "https://github.com/akinsho/toggleterm.nvim"
   },
   undotree = {
     loaded = true,
@@ -245,6 +272,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/matthewanderson1/.local/share/nvim/site/pack/packer/start/vim-fugitive",
     url = "https://github.com/tpope/vim-fugitive"
+  },
+  vimtex = {
+    loaded = true,
+    path = "/Users/matthewanderson1/.local/share/nvim/site/pack/packer/start/vimtex",
+    url = "https://github.com/lervag/vimtex"
   }
 }
 
@@ -253,6 +285,14 @@ time([[Defining packer_plugins]], false)
 time([[Config for alpha-nvim]], true)
 try_loadstring("\27LJ\2\na\0\0\5\0\5\0\n6\0\0\0'\2\1\0B\0\2\0029\0\2\0006\2\0\0'\4\3\0B\2\2\0029\2\4\2B\0\2\1K\0\1\0\vconfig\27alpha.themes.dashboard\nsetup\nalpha\frequire\0", "config", "alpha-nvim")
 time([[Config for alpha-nvim]], false)
+-- Config for: orgmode
+time([[Config for orgmode]], true)
+try_loadstring("\27LJ\2\n9\0\0\3\0\3\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0004\2\0\0B\0\2\1K\0\1\0\nsetup\forgmode\frequire\0", "config", "orgmode")
+time([[Config for orgmode]], false)
+-- Config for: toggleterm.nvim
+time([[Config for toggleterm.nvim]], true)
+try_loadstring("\27LJ\2\n8\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\15toggleterm\frequire\0", "config", "toggleterm.nvim")
+time([[Config for toggleterm.nvim]], false)
 
 _G._packer.inside_compile = false
 if _G._packer.needs_bufread == true then

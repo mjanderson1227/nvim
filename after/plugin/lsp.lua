@@ -4,7 +4,7 @@ lsp.preset("recommended")
 
 lsp.ensure_installed({
   'tsserver',
-  'rust_analyzer',
+  'rust_analyzer'
 })
 
 -- Fix Undefined global 'vim'
@@ -19,16 +19,6 @@ lsp.configure('lua-language-server', {
         }
     }
 })
-
--- Setting up ccls
-lsp.configure('ccls', {
-  init_options = {
-    cache = {
-      directory = ".ccls-cache"
-    }
-  }
-})
-
 
 local cmp = require('cmp')
 local cmp_select = {behavior = cmp.SelectBehavior.Select}
@@ -56,7 +46,7 @@ lsp.set_preferences({
     }
 })
 
-lsp.on_attach(function(client, bufnr)
+lsp.on_attach(function(bufnr)
   local opts = {buffer = bufnr, remap = false}
 
   vim.keymap.set("n", "gd", function() vim.lsp.buf.definition() end, opts)

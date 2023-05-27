@@ -20,6 +20,7 @@ return require('packer').startup(function(use)
     -- TreeSitter Highlighting & Parsing:
     use('nvim-treesitter/nvim-treesitter', {run = ':TSUpdate'})
     use('nvim-treesitter/playground')
+    use('nvim-treesitter/nvim-treesitter-context')
 
     -- Harpoon Directory Navigation
     use('theprimeagen/harpoon')
@@ -104,9 +105,31 @@ return require('packer').startup(function(use)
     use "lukas-reineke/indent-blankline.nvim"
 
     -- Github copilot integration
-    use("github/copilot.vim") 
+    use("github/copilot.vim")
 
-    --  
-    
+    -- Emmet HTML Boilerplate Generator
+    use("mattn/emmet-vim")
 
+    -- ToggleTerm
+    use {
+        "akinsho/toggleterm.nvim",
+        tag = '*',
+        config = function()
+            require("toggleterm").setup()
+        end
+    }
+
+    -- Rust Tools
+    use 'simrat39/rust-tools.nvim'
+
+    -- Texlab
+    use 'lervag/vimtex'
+
+    -- Org Mode - Marked For Possible Deletion
+    use {
+        'nvim-orgmode/orgmode',
+        config = function()
+            require('orgmode').setup{}
+        end
+    }
 end)

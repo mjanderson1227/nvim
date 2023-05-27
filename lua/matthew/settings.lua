@@ -30,3 +30,6 @@ vim.g.loaded_perl_provider = 0
 vim.g.loaded_ruby_provider = 0
 
 vim.opt.clipboard = "unnamed"
+
+-- Disable Copilot on startup
+vim.cmd("autocmd VimEnter * Copilot disable")
