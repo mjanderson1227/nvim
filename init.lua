@@ -38,6 +38,9 @@ require('lazy').setup({
   -- UndoTree
   'mbbill/undotree',
 
+  -- Indent Blankline
+  'lukas-reineke/indent-blankline.nvim',
+
   -- Twilight Nvim
   {
     "folke/twilight.nvim",
