@@ -667,6 +667,8 @@ local servers = {
       },
     },
   },
+
+  html = {},
 }
 
 -- Setup neovim lua configuration
