@@ -31,15 +31,15 @@ require('lazy').setup({
   -- Discord neovim integration
   'andweeb/presence.nvim',
 
+  -- Auto closing delimeters
+  'rstacruz/vim-closer',
+
   -- Git related plugins
   'tpope/vim-fugitive',
   'tpope/vim-rhubarb',
 
   -- UndoTree
   'mbbill/undotree',
-
-  -- Indent Blankline
-  'lukas-reineke/indent-blankline.nvim',
 
   -- Twilight Nvim
   {
