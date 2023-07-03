@@ -606,6 +606,9 @@ local servers = {
       },
     },
   },
+
+  -- Disable html Formatting
+  html = {},
 }
 
 -- Setup neovim lua configuration
@@ -625,6 +628,9 @@ mason_lspconfig.setup {
 mason_lspconfig.setup_handlers {
   function(server_name)
     require('lspconfig')[server_name].setup {
+      init_options = {
+        provideFormatter = false
+      },
       capabilities = capabilities,
       on_attach = on_attach,
       settings = servers[server_name],
