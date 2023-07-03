@@ -42,7 +42,9 @@ require('lazy').setup({
   'mbbill/undotree',
 
   -- ToggleTerminal
-  { 'akinsho/toggleterm.nvim', version = "*", config = true },
+  {
+    'akinsho/toggleterm.nvim', version = "*", config = true
+  },
 
   -- Trouble diagnostics
   {
@@ -97,7 +99,7 @@ require('lazy').setup({
           ft = "toggleterm",
           size = { height = 0.4 },
           -- exclude floating windows
-          filter = function(buf, win)
+          filter = function(_, win)
             return vim.api.nvim_win_get_config(win).relative == ""
           end,
         },
@@ -110,10 +112,13 @@ require('lazy').setup({
           end,
         },
         "Trouble",
-        { ft = "qf",            title = "QuickFix" },
+        {
+          ft = "qf",
+          title = "QuickFix"
+        },
         {
           ft = "help",
-          size = { height = 20 },
+          size = { height = 16 },
           -- only show help buffers
           filter = function(buf)
             return vim.bo[buf].buftype == "help"
@@ -274,7 +279,7 @@ require('lazy').setup({
   },
 
   -- Useful plugin to show you pending keybinds.
-  { 'folke/which-key.nvim',    opts = {} },
+  { 'folke/which-key.nvim',          opts = {} },
   {
     -- Adds git related signs to the gutter, as well as utilities for managing changes
     'lewis6991/gitsigns.nvim',
