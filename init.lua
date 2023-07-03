@@ -41,6 +41,37 @@ require('lazy').setup({
   -- UndoTree
   'mbbill/undotree',
 
+  -- ToggleTerminal
+  { 'akinsho/toggleterm.nvim', version = "*", config = true },
+
+  -- Trouble diagnostics
+  {
+    "folke/trouble.nvim",
+    dependencies = { "nvim-tree/nvim-web-devicons" },
+    opts = {
+      -- your configuration comes here
+      -- or leave it empty to use the default settings
+      -- refer to the configuration section below
+    },
+  },
+
+  -- Noice command line management
+  {
+    "folke/noice.nvim",
+    event = "VeryLazy",
+    opts = {
+      -- add any options here
+    },
+    dependencies = {
+      -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
+      "MunifTanjim/nui.nvim",
+      -- OPTIONAL:
+      --   `nvim-notify` is only needed, if you want to use the notification view.
+      --   If not available, we use `mini` as the fallback
+      "rcarriga/nvim-notify",
+    }
+  },
+
   -- Twilight Nvim
   {
     "folke/twilight.nvim",
@@ -243,7 +274,7 @@ require('lazy').setup({
   },
 
   -- Useful plugin to show you pending keybinds.
-  { 'folke/which-key.nvim',          opts = {} },
+  { 'folke/which-key.nvim',    opts = {} },
   {
     -- Adds git related signs to the gutter, as well as utilities for managing changes
     'lewis6991/gitsigns.nvim',
@@ -404,11 +435,16 @@ vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = tr
 vim.keymap.set('n', '<leader>lg', vim.cmd.LazyGit)
 
 -- Invoking NeoTree
-vim.keymap.set('n', '<leader>nf', vim.cmd.NeoTreeFloatToggle)
 vim.keymap.set('n', '<leader>nt', vim.cmd.NeoTreeFocusToggle)
 
 -- Invoking UndoTree
 vim.keymap.set('n', '<leader>u', vim.cmd.UndotreeToggle)
+
+-- Invoking ToggleTerminal
+vim.keymap.set('n', '<leader>tt', vim.cmd.ToggleTerm)
+
+-- Invoking trouble diagnostic list
+vim.keymap.set('n', '<leader>el', vim.cmd.TroubleToggle)
 
 -- [[ Highlight on yank ]]
 -- See `:help vim.highlight.on_yank()`
@@ -419,6 +455,26 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   end,
   group = highlight_group,
   pattern = '*',
+})
+
+-- [[ Configure Noice.nvim ]]
+require("noice").setup({
+  lsp = {
+    -- override markdown rendering so that **cmp** and other plugins use **Treesitter**
+    override = {
+      ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
+      ["vim.lsp.util.stylize_markdown"] = true,
+      ["cmp.entry.get_documentation"] = true,
+    },
+  },
+  -- you can enable a preset for easier configuration
+  presets = {
+    bottom_search = true,         -- use a classic bottom cmdline for search
+    command_palette = true,       -- position the cmdline and popupmenu together
+    long_message_to_split = true, -- long messages will be sent to a split
+    inc_rename = false,           -- enables an input dialog for inc-rename.nvim
+    lsp_doc_border = false,       -- add a border to hover docs and signature help
+  },
 })
 
 -- [[ Configure RangerNvim ]]
@@ -478,7 +534,7 @@ require('nvim-treesitter.configs').setup {
   auto_install = false,
 
   highlight = { enable = true },
-  indent = { enable = true, disable = { 'python' } },
+  indent = { enable = true, disable = { 'python', 'html' } },
   incremental_selection = {
     enable = true,
     keymaps = {
@@ -606,9 +662,6 @@ local servers = {
       },
     },
   },
-
-  -- Disable html Formatting
-  html = {},
 }
 
 -- Setup neovim lua configuration
@@ -628,9 +681,6 @@ mason_lspconfig.setup {
 mason_lspconfig.setup_handlers {
   function(server_name)
     require('lspconfig')[server_name].setup {
-      init_options = {
-        provideFormatter = false
-      },
       capabilities = capabilities,
       on_attach = on_attach,
       settings = servers[server_name],
