@@ -41,6 +41,9 @@ require('lazy').setup({
   -- UndoTree
   'mbbill/undotree',
 
+  -- Nvim Spectre
+  'nvim-pack/nvim-spectre',
+
   -- ToggleTerminal
   {
     'akinsho/toggleterm.nvim', version = "*", config = true
@@ -450,6 +453,9 @@ vim.keymap.set('n', '<leader>tt', vim.cmd.ToggleTerm)
 
 -- Invoking trouble diagnostic list
 vim.keymap.set('n', '<leader>el', vim.cmd.TroubleToggle)
+
+-- Invoking Spectre panel
+vim.keymap.set('n', '<leader>sp', vim.cmd.Spectre)
 
 -- [[ Highlight on yank ]]
 -- See `:help vim.highlight.on_yank()`
