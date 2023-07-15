@@ -44,6 +44,14 @@ require('lazy').setup({
   -- Nvim Spectre
   'nvim-pack/nvim-spectre',
 
+  -- CSS color picker
+  {
+    "ziontee113/color-picker.nvim",
+    config = function()
+      require("color-picker")
+    end,
+  },
+
   -- ToggleTerminal
   {
     'akinsho/toggleterm.nvim', version = "*", config = true
@@ -65,8 +73,36 @@ require('lazy').setup({
     "folke/noice.nvim",
     event = "VeryLazy",
     opts = {
-      -- add any options here
+      lsp = {
+        -- override markdown rendering so that **cmp** and other plugins use **Treesitter**
+        override = {
+          ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
+          ["vim.lsp.util.stylize_markdown"] = true,
+          ["cmp.entry.get_documentation"] = true,
+        },
+      },
+
+      -- you can enable a preset for easier configuration
+      presets = {
+        bottom_search = true,         -- use a classic bottom cmdline for search
+        command_palette = true,       -- position the cmdline and popupmenu together
+        long_message_to_split = true, -- long messages will be sent to a split
+        inc_rename = false,           -- enables an input dialog for inc-rename.nvim
+        lsp_doc_border = true,        -- add a border to hover docs and signature help
+      },
+
+      -- configure routes to hide no information available text.
+      routes = {
+        {
+          filter = {
+            event = "notify",
+            find = "No information available",
+          },
+          opts = { skip = true },
+        },
+      },
     },
+
     dependencies = {
       -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
       "MunifTanjim/nui.nvim",
@@ -393,11 +429,6 @@ vim.wo.number = true
 -- Disable mouse mode
 vim.o.mouse = nil
 
--- Sync clipboard between OS and Neovim.
---  Remove this option if you want your OS clipboard to remain independent.
---  See `:help 'clipboard'`
-vim.o.clipboard = 'unnamedplus'
-
 -- Enable break indent
 vim.o.breakindent = true
 
@@ -468,26 +499,6 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   pattern = '*',
 })
 
--- [[ Configure Noice.nvim ]]
-require("noice").setup({
-  lsp = {
-    -- override markdown rendering so that **cmp** and other plugins use **Treesitter**
-    override = {
-      ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
-      ["vim.lsp.util.stylize_markdown"] = true,
-      ["cmp.entry.get_documentation"] = true,
-    },
-  },
-  -- you can enable a preset for easier configuration
-  presets = {
-    bottom_search = true,         -- use a classic bottom cmdline for search
-    command_palette = true,       -- position the cmdline and popupmenu together
-    long_message_to_split = true, -- long messages will be sent to a split
-    inc_rename = false,           -- enables an input dialog for inc-rename.nvim
-    lsp_doc_border = false,       -- add a border to hover docs and signature help
-  },
-})
-
 -- [[ Configure RangerNvim ]]
 local ranger_nvim = require("ranger-nvim")
 ranger_nvim.setup({
@@ -500,6 +511,26 @@ ranger_nvim.setup({
     ["or"] = ranger_nvim.OPEN_MODE.rifle,
   },
 })
+
+-- [[ Configure CSS Color Picker ]]
+local opts = { noremap = true, silent = true }
+
+vim.keymap.set("n", "<C-c>", "<cmd>PickColor<cr>", opts)
+vim.keymap.set("i", "<C-c>", "<cmd>PickColorInsert<cr>", opts)
+
+require("color-picker").setup({ -- for changing icons & mappings
+  ["icons"] = { "ﱢ", "" },
+  ["border"] = "rounded",       -- none | single | double | rounded | solid | shadow
+  ["keymap"] = {                -- mapping example:
+    ["U"] = "<Plug>ColorPickerSlider5Decrease",
+    ["O"] = "<Plug>ColorPickerSlider5Increase",
+  },
+  ["background_highlight_group"] = "Normal",  -- default
+  ["border_highlight_group"] = "FloatBorder", -- default
+  ["text_highlight_group"] = "Normal",        --default
+})
+
+vim.cmd([[hi FloatBorder guibg=NONE]]) -- if you don't want weird border background colors around the popup.
 
 -- [[ Configure Telescope ]]
 -- See `:help telescope` and `:help telescope.setup()`
