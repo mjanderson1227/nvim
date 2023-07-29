@@ -31,6 +31,9 @@ require('lazy').setup({
   -- Discord neovim integration
   'andweeb/presence.nvim',
 
+  -- Razor HTML supports
+  'jlcrochet/vim-razor',
+
   -- Auto closing delimeters
   'rstacruz/vim-closer',
 
@@ -46,9 +49,9 @@ require('lazy').setup({
 
   -- CSS color picker
   {
-    "ziontee113/color-picker.nvim",
+    'ziontee113/color-picker.nvim',
     config = function()
-      require("color-picker")
+      require('color-picker')
     end,
   },
 
@@ -147,7 +150,7 @@ require('lazy').setup({
           title = "LazyTerm",
           size = { height = 0.4 },
           filter = function(buf)
-            return not vim.b[buf].lazyterm_cmd
+            return vim.b[buf].lazyterm_cmd
           end,
         },
         "Trouble",
@@ -157,7 +160,7 @@ require('lazy').setup({
         },
         {
           ft = "help",
-          size = { height = 16 },
+          size = { height = 30 },
           -- only show help buffers
           filter = function(buf)
             return vim.bo[buf].buftype == "help"
@@ -240,7 +243,6 @@ require('lazy').setup({
   {
     "folke/flash.nvim",
     event = "VeryLazy",
-    ---@type Flash.Config
     opts = {},
     keys = {
       {
@@ -401,6 +403,8 @@ require('lazy').setup({
     },
     build = ':TSUpdate',
   },
+
+  'nvim-treesitter/playground',
 
   -- NOTE: Next Step on Your Neovim Journey: Add/Configure additional "plugins" for kickstart
   --       These are some example plugins that I've included in the kickstart repository.
@@ -568,7 +572,7 @@ vim.keymap.set('n', '<leader>sd', require('telescope.builtin').diagnostics, { de
 
 -- [[ Configure Treesitter ]]
 -- See `:help nvim-treesitter`
-require('nvim-treesitter.configs').setup {
+require('nvim-treesitter.configs').setup({
   -- Add languages to be installed here that you want installed for treesitter
   ensure_installed = { 'c', 'cpp', 'go', 'lua', 'python', 'rust', 'tsx', 'typescript', 'vimdoc', 'vim' },
 
@@ -630,7 +634,7 @@ require('nvim-treesitter.configs').setup {
       },
     },
   },
-}
+})
 
 -- Diagnostic keymaps
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous diagnostic message' })
@@ -689,10 +693,10 @@ end
 --  Add any additional override configuration in the following tables. They will be passed to
 --  the `settings` field of the server config. You must look up that documentation yourself.
 local servers = {
-  -- clangd = {},
+  clangd = {},
   -- gopls = {},
-  -- pyright = {},
-  -- rust_analyzer = {},
+  pyright = {},
+  rust_analyzer = {},
   -- tsserver = {},
 
   lua_ls = {
@@ -734,6 +738,33 @@ mason_lspconfig.setup_handlers {
     }
   end,
 }
+
+-- [[ Emmet integration ]]
+vim.api.nvim_create_autocmd({ "FileType" }, {
+  pattern = "astro,css,eruby,html,htmldjango,javascriptreact,less,pug,sass,scss,svelte,typescriptreact,vue",
+  callback = function()
+    vim.lsp.start({
+      cmd = { "emmet-language-server", "--stdio" },
+      root_dir = vim.fs.dirname(vim.fs.find({ ".git" }, { upward = true })[1]),
+      init_options = {
+        --- @type table<string, any> https://docs.emmet.io/customization/preferences/
+        preferences = {},
+        --- @type "always" | "never" defaults to `"always"`
+        showexpandedabbreviation = "always",
+        --- @type boolean defaults to `true`
+        showabbreviationsuggestions = true,
+        --- @type boolean defaults to `false`
+        showsuggestionsassnippets = false,
+        --- @type table<string, any> https://docs.emmet.io/customization/syntax-profiles/
+        syntaxprofiles = {},
+        --- @type table<string, string> https://docs.emmet.io/customization/snippets/#variables
+        variables = {},
+        --- @type string[]
+        excludelanguages = {},
+      },
+    })
+  end,
+})
 
 -- [[ Configure nvim-cmp ]]
 -- See `:help cmp`
