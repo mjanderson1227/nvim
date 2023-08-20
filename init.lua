@@ -4,6 +4,13 @@
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
+-- Disable other providers
+vim.g.loaded_perl_provider = 0
+vim.g.loaded_ruby_provider = 0
+vim.g.loaded_node_provider = 0
+vim.g.loaded_python_provider = 0
+vim.g.loaded_python3_provider = 0
+
 -- Install package manager
 --    https://github.com/folke/lazy.nvim
 --    `:help lazy.nvim.txt` for more info
@@ -31,8 +38,13 @@ require('lazy').setup({
   -- Discord neovim integration
   'andweeb/presence.nvim',
 
-  -- Razor HTML supports
-  'jlcrochet/vim-razor',
+  -- using packer.nvim
+  {
+    'nmac427/guess-indent.nvim',
+    config = function()
+      require('guess-indent').setup {}
+    end,
+  },
 
   -- Auto closing delimeters
   'rstacruz/vim-closer',
@@ -40,6 +52,17 @@ require('lazy').setup({
   -- Git related plugins
   'tpope/vim-fugitive',
   'tpope/vim-rhubarb',
+
+  --jdtls for Java Development
+  'mfussenegger/nvim-jdtls',
+
+  -- Oil File viewer
+  {
+    'stevearc/oil.nvim',
+    opts = {},
+    -- Optional dependencies
+    dependencies = { "nvim-tree/nvim-web-devicons" },
+  },
 
   -- UndoTree
   'mbbill/undotree',
@@ -516,6 +539,10 @@ ranger_nvim.setup({
   },
 })
 
+-- [[ Setup oil.nvim ]]
+require("oil").setup()
+vim.keymap.set("n", "<leader>-", require("oil").open, { desc = "Open parent directory" })
+
 -- [[ Configure CSS Color Picker ]]
 local opts = { noremap = true, silent = true }
 
@@ -706,6 +733,11 @@ local servers = {
       diagnostics = {
         globals = { 'vim', 'it', 'should', 'describe', },
       },
+    },
+  },
+  cssls = {
+    css = {
+      lint = { unknownAtRules = "ignore" },
     },
   },
 
