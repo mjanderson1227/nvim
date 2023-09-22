@@ -8,8 +8,9 @@ vim.g.maplocalleader = ' '
 vim.g.loaded_perl_provider = 0
 vim.g.loaded_ruby_provider = 0
 vim.g.loaded_node_provider = 0
-vim.g.loaded_python_provider = 0
-vim.g.loaded_python3_provider = 0
+
+-- Set provider path for python3
+vim.g.python3_host_prog = "/usr/bin/python3"
 
 -- Install package manager
 --    https://github.com/folke/lazy.nvim
@@ -56,6 +57,12 @@ require('lazy').setup({
   --jdtls for Java Development
   'mfussenegger/nvim-jdtls',
 
+  -- Symbols Outline
+  {
+    'simrat39/symbols-outline.nvim',
+    config = true
+  },
+
   -- Oil File viewer
   {
     'stevearc/oil.nvim',
@@ -92,51 +99,6 @@ require('lazy').setup({
       -- or leave it empty to use the default settings
       -- refer to the configuration section below
     },
-  },
-
-  -- Noice command line management
-  {
-    "folke/noice.nvim",
-    event = "VeryLazy",
-    opts = {
-      lsp = {
-        -- override markdown rendering so that **cmp** and other plugins use **Treesitter**
-        override = {
-          ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
-          ["vim.lsp.util.stylize_markdown"] = true,
-          ["cmp.entry.get_documentation"] = true,
-        },
-      },
-
-      -- you can enable a preset for easier configuration
-      presets = {
-        bottom_search = true,         -- use a classic bottom cmdline for search
-        command_palette = true,       -- position the cmdline and popupmenu together
-        long_message_to_split = true, -- long messages will be sent to a split
-        inc_rename = false,           -- enables an input dialog for inc-rename.nvim
-        lsp_doc_border = true,        -- add a border to hover docs and signature help
-      },
-
-      -- configure routes to hide no information available text.
-      routes = {
-        {
-          filter = {
-            event = "notify",
-            find = "No information available",
-          },
-          opts = { skip = true },
-        },
-      },
-    },
-
-    dependencies = {
-      -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
-      "MunifTanjim/nui.nvim",
-      -- OPTIONAL:
-      --   `nvim-notify` is only needed, if you want to use the notification view.
-      --   If not available, we use `mini` as the fallback
-      "rcarriga/nvim-notify",
-    }
   },
 
   -- Twilight Nvim
@@ -496,6 +458,9 @@ vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
 -- Remap for dealing with word wrap
 vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
 vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
+
+-- Invoke Symbol Outline individually
+vim.keymap.set('n', '<leader>sy', vim.cmd.SymbolsOutline)
 
 -- Remap for Invoking LazyGit
 vim.keymap.set('n', '<leader>lg', vim.cmd.LazyGit)
