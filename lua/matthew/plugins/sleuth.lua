@@ -1,0 +1,3 @@
+return {
+  'tpope/nvim-sleuth'
+}

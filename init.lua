@@ -71,10 +71,10 @@ require('lazy').setup({
   'tpope/vim-fugitive',
   'tpope/vim-rhubarb',
 
-  --jdtls for Java Development
+  --jdtls for Java Development - TODO:
   'mfussenegger/nvim-jdtls',
 
-  -- Symbols Outline
+  -- Symbols Outline - TODO
   {
     'simrat39/symbols-outline.nvim',
     config = true
@@ -94,7 +94,7 @@ require('lazy').setup({
   -- Nvim Spectre
   'nvim-pack/nvim-spectre',
 
-  -- CSS color picker
+  -- CSS color picker TODO
   {
     'ziontee113/color-picker.nvim',
     config = function()
@@ -102,7 +102,7 @@ require('lazy').setup({
     end,
   },
 
-  -- ToggleTerminal
+  -- ToggleTerminal TODO
   {
     'akinsho/toggleterm.nvim', version = "*", config = true
   },
@@ -111,14 +111,10 @@ require('lazy').setup({
   {
     "folke/trouble.nvim",
     dependencies = { "nvim-tree/nvim-web-devicons" },
-    opts = {
-      -- your configuration comes here
-      -- or leave it empty to use the default settings
-      -- refer to the configuration section below
-    },
+    opts = {},
   },
 
-  -- Twilight Nvim
+  -- Twilight Nvim TODO
   {
     "folke/twilight.nvim",
     opts = {
@@ -128,7 +124,7 @@ require('lazy').setup({
     }
   },
 
-  -- Edgy window management
+  -- Edgy window management TODO
   {
     "folke/edgy.nvim",
     event = "VeryLazy",
