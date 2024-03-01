@@ -20,7 +20,7 @@ end
 
 -- The on_attach function is used to set key maps after the language server
 -- attaches to the current buffer
-local on_attach = function(client, bufnr)
+local do_on_attach = function(client, bufnr)
   -- Regular Neovim LSP client keymappings
   local bufopts = { noremap = true, silent = true, buffer = bufnr }
   nnoremap('gD', vim.lsp.buf.declaration, bufopts, "Go to declaration")
@@ -50,7 +50,7 @@ end
 
 local config = {
   cmd = { '/usr/share/java/jdtls/bin/jdtls' },
-  on_attach = on_attach,
+  on_attach = do_on_attach,
   root_dir = vim.fs.dirname(vim.fs.find({ 'gradlew', '.git', 'mvnw' }, { upward = true })[1]),
 }
 

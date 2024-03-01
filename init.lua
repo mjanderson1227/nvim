@@ -1,8 +1,8 @@
--- Set <space> as the leader key
--- See `:help mapleader`
---  NOTE: Must happen before plugins are required (otherwise wrong leader will be used)
+-- Set <space> as the leader key See `:help mapleader`
+-- NOTE: Must happen before plugins are required (otherwise wrong leader will be used)
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
+vim.opt.guicursor = 'sm:block-blinkwait175-blinkoff150-blinkon175'
 
 -- Disable other providers
 vim.g.loaded_perl_provider = 0
@@ -11,6 +11,11 @@ vim.g.loaded_node_provider = 0
 
 -- Set provider path for python3
 vim.g.python3_host_prog = "/usr/bin/python3"
+
+vim.api.nvim_create_autocmd({ "BufWritePre" }, {
+  pattern = { "*.ts", "*.js", "*.tsx", "*.jsx" },
+  command = "EslintFixAll"
+})
 
 -- Install package manager
 --    https://github.com/folke/lazy.nvim
@@ -36,8 +41,20 @@ vim.opt.rtp:prepend(lazypath)
 require('lazy').setup({
   -- NOTE: First, some plugins that don't require any configuration
 
-  -- Discord neovim integration
-  'andweeb/presence.nvim',
+  -- DB integration
+  'tpope/vim-dadbod',
+
+  -- UI for DB
+  'kristijanhusak/vim-dadbod-ui',
+
+  -- Completion for DB
+  'kristijanhusak/vim-dadbod-completion',
+
+  -- Jupyter integration
+  'dccsillag/magma-nvim',
+
+  -- Automatic indention detection.
+  'tpope/vim-sleuth',
 
   -- using packer.nvim
   {
@@ -231,6 +248,7 @@ require('lazy').setup({
     opts = {},
     keys = {
       {
+        id = "s",
         "s",
         mode = { "n", "x", "o" },
         function()
@@ -240,6 +258,7 @@ require('lazy').setup({
         desc = "Flash",
       },
       {
+        id = "S",
         "S",
         mode = { "n", "o", "x" },
         function()
@@ -249,6 +268,7 @@ require('lazy').setup({
         desc = "Flash Treesitter",
       },
       {
+        id = "r",
         "r",
         mode = "o",
         function()
@@ -258,6 +278,7 @@ require('lazy').setup({
         desc = "Remote Flash",
       },
       {
+        id = "R",
         "R",
         mode = { "n", "o", "x" },
         function()
@@ -480,6 +501,28 @@ vim.keymap.set('n', '<leader>el', vim.cmd.TroubleToggle)
 -- Invoking Spectre panel
 vim.keymap.set('n', '<leader>sp', vim.cmd.Spectre)
 
+-- Toggle Terminal Background
+vim.keymap.set('n', '<leader>bg', function()
+  vim.fn.system({
+    "picom-trans",
+    "-t",
+    "-w",
+    os.getenv("WINDOWID")
+  })
+end)
+
+-- [[ Magma Keymaps ]]
+vim.keymap.set('n', '<leader>r', ':MagmaEvaluateOperator<CR>', { silent = true, expr = true })
+vim.keymap.set('n', '<leader>rr', ':MagmaEvaluateLine<CR>', { silent = true })
+vim.keymap.set('x', '<leader>r', ':<C-u>MagmaEvaluateVisual<CR>', { silent = true })
+vim.keymap.set('n', '<leader>rc', ':MagmaReevaluateCell<CR>', { silent = true })
+vim.keymap.set('n', '<leader>rd', ':MagmaDelete<CR>', { silent = true })
+vim.keymap.set('n', '<leader>ro', ':MagmaShowOutput<CR>', { silent = true })
+vim.keymap.set('n', '<leader>rs', ':MagmaRestart<CR>', { silent = true })
+
+vim.g.magma_automatically_open_output = false
+vim.g.magma_image_provider = "ueberzug"
+
 -- [[ Highlight on yank ]]
 -- See `:help vim.highlight.on_yank()`
 local highlight_group = vim.api.nvim_create_augroup('YankHighlight', { clear = true })
@@ -564,6 +607,7 @@ vim.keymap.set('n', '<leader>sd', require('telescope.builtin').diagnostics, { de
 
 -- [[ Configure Treesitter ]]
 -- See `:help nvim-treesitter`
+--- @diagnostic disable-next-line: missing-fields
 require('nvim-treesitter.configs').setup({
   -- Add languages to be installed here that you want installed for treesitter
   ensure_installed = { 'c', 'cpp', 'go', 'lua', 'python', 'rust', 'tsx', 'typescript', 'vimdoc', 'vim' },
@@ -689,7 +733,8 @@ local servers = {
   -- gopls = {},
   pyright = {},
   rust_analyzer = {},
-  -- tsserver = {},
+  tsserver = {},
+  ocamllsp = {},
 
   lua_ls = {
     Lua = {
@@ -770,6 +815,7 @@ local luasnip = require 'luasnip'
 require('luasnip.loaders.from_vscode').lazy_load()
 luasnip.config.setup {}
 
+--- @diagnostic disable-next-line: missing-fields
 cmp.setup {
   snippet = {
     expand = function(args)
