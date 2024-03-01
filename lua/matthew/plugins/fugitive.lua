@@ -1,6 +1,6 @@
 return {
   'tpope/vim-fugitive',
-  dependencies = { "vim-rhubarb" },
+  dependencies = { "tpope/vim-rhubarb" },
   config = function()
     vim.api.nvim_create_user_command(
       'Browse',

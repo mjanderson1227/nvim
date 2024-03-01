@@ -12,13 +12,14 @@ return {
           }
         }
       }
-    }
+    },
     config = function()
       local telescope = require('telescope')
       local builtin = require('telescope.builtin')
       local themes = require('telescope.themes')
 
       pcall(telescope.load_extension, 'fzf')
+
       vim.keymap.set(
         'n',
         '<leader>?',
