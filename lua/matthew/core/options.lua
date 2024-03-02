@@ -15,17 +15,17 @@ vim.o.undofile = true
 vim.o.ignorecase = true
 vim.o.smartcase = true
 
-vim.wo.signcolumn = 'yes'
+vim.wo.signcolumn = "yes"
 
 vim.o.updatetime = 250
 vim.o.timeout = true
 vim.o.timeoutlen = 300
 
-vim.o.completeopt = 'menuone,noselect'
+vim.o.completeopt = "menuone,noselect"
 
 vim.o.rnu = true
 
 vim.o.termguicolors = true
 
-vim.o.ts = 4
-vim.o.sw = 4
+vim.o.ts = 2
+vim.o.sw = 2

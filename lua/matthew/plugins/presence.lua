@@ -1,8 +1,8 @@
 return {
-  'andweeb/presence.nvim',
-  ft = 'presence',
-  lazy = false,
-  opts = {
-    show_time = false
-  }
+	"andweeb/presence.nvim",
+	ft = "presence",
+	lazy = false,
+	opts = {
+		show_time = false,
+	},
 }
