@@ -1,2 +1,2 @@
-require("matthew.lazy")
 require("matthew.core")
+require("matthew.lazy")

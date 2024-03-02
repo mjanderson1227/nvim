@@ -1,3 +1,7 @@
+vim.g.mapleader = " "
+
+vim.opt.guicursor = ""
+
 vim.o.hlsearch = false
 
 vim.wo.number = true

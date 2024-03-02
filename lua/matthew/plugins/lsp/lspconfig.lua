@@ -4,7 +4,7 @@ return {
     'williamboman/mason-lspconfig.nvim',
     'folke/neodev.nvim',
     {
-      'willamboman/mason.nvim',
+      'williamboman/mason.nvim',
       config = true
     },
     {
