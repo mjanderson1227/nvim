@@ -22,7 +22,7 @@ return {
 		vim.keymap.set("n", "<leader>si", dap.step_into)
 		vim.keymap.set("n", "<leader>sov", dap.step_over)
 		vim.keymap.set("n", "<leader>sot", dap.step_out)
-		vim.keymap.set("n", "<leader>b", dap.toggle_breakpoint)
+		vim.keymap.set("n", "<leader>br", dap.toggle_breakpoint)
 		vim.keymap.set("n", "<leader>B", function()
 			dap.set_breakpoint(vim.fn.input("Breakpoint condition: "))
 		end)

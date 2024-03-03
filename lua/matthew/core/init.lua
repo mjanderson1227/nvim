@@ -1,2 +1,2 @@
-require("matthew.core.keymaps")
 require("matthew.core.options")
+require("matthew.core.keymaps")

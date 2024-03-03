@@ -1,6 +1,6 @@
 vim.g.mapleader = " "
 
-vim.opt.guicursor = ""
+vim.opt.guicursor = "sm:block-blinkwait175-blinkoff150-blinkon175"
 
 vim.o.hlsearch = false
 
