@@ -1,4 +1,5 @@
 vim.g.mapleader = " "
+vim.g.maplocalleader = " "
 
 vim.opt.guicursor = "sm:block-blinkwait175-blinkoff150-blinkon175"
 
