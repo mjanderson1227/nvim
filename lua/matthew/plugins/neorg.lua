@@ -2,6 +2,7 @@ return {
 	"nvim-neorg/neorg",
 	dependencies = {
 		"hrsh7th/nvim-cmp",
+		"nvim-lua/plenary.nvim",
 	},
 	run = ":Neorg sync-parsers",
 	opts = {
@@ -30,4 +31,5 @@ return {
 			},
 		},
 	},
+	priority = 1000,
 }

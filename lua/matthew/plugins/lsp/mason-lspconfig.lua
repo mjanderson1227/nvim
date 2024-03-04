@@ -3,7 +3,9 @@ local servers = {
 	-- gopls = {},
 	pyright = {},
 	rust_analyzer = {},
-	tsserver = {},
+	tsserver = {
+		format = true,
+	},
 	ocamllsp = {},
 
 	lua_ls = {
