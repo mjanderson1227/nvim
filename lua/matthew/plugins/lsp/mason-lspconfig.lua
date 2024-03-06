@@ -1,3 +1,19 @@
+local border = {
+	{ "┌", "FloatBorder" },
+	{ "─", "FloatBorder" },
+	{ "┐", "FloatBorder" },
+	{ "│", "FloatBorder" },
+	{ "┘", "FloatBorder" },
+	{ "─", "FloatBorder" },
+	{ "└", "FloatBorder" },
+	{ "│", "FloatBorder" },
+}
+
+local handlers = {
+	["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = border }),
+	["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = border }),
+}
+
 local servers = {
 	clangd = {},
 	-- gopls = {},
@@ -29,6 +45,14 @@ local servers = {
 local function on_attach(_, bufnr)
 	local telescope = require("telescope.builtin")
 	local lspbuf = vim.lsp.buf
+
+	vim.diagnostic.config({
+		virtual_text = {
+			prefix = "■ ",
+		},
+		float = { border = border },
+	})
+
 	local function nmap(keys, func, desc)
 		if desc then
 			desc = "LSP: " .. desc
@@ -83,6 +107,7 @@ return {
 		mason_lspconfig.setup_handlers({
 			function(server_name)
 				require("lspconfig")[server_name].setup({
+					handlers = handlers,
 					init_options = {
 						provideFormatter = false,
 					},
