@@ -1,8 +1,23 @@
 return {
-	"sbdchd/neoformat",
+	"stevearc/conform.nvim",
+	opts = {},
 	config = function()
-		vim.api.nvim_create_autocmd("BufWritePre", {
-			command = "try | undojoin | Neoformat | catch /E790/ | Neoformat | endtry",
+		require("conform").setup({
+			formatters_by_ft = {
+				lua = { "stylua" },
+				ocaml = { "ocamlformat" },
+				javascript = { { "prettierd", "prettier", "typescript-language-server" } },
+				typescript = { { "prettierd", "prettier", "typescript-language-server" } },
+				javascriptreact = { { "prettierd", "prettier", "typescript-language-server" } },
+				typescriptreact = { { "prettierd", "prettier", "typescript-language-server" } },
+				python = { "black" },
+				c = { "clang-format" },
+				cpp = { "clang-format" },
+			},
+			format_on_save = {
+				timeout_ms = 500,
+				lsp_fallback = true,
+			},
 		})
 	end,
 }

@@ -18,7 +18,11 @@ local servers = {
 	clangd = {},
 	-- gopls = {},
 	pyright = {},
-	rust_analyzer = {},
+	rust_analyzer = {
+		rustfmt = {
+			rangeFormatting = { enable = true },
+		},
+	},
 	tsserver = {
 		format = true,
 	},
