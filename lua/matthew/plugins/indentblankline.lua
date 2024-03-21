@@ -4,6 +4,7 @@ return {
 	opts = {
 		indent = {
 			char = "┊",
+			repeat_linebreak = false,
 		},
 		scope = {
 			include = {
