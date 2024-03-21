@@ -13,8 +13,8 @@ vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float, { desc = "Open float
 vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist, { desc = "Open diagnostics list" })
 
 vim.keymap.set("n", "<leader>bg", function()
-	if vim.system({ "command", "picom-trans", "-v" }, nil):wait().code == 0 then
-		vim.fn.system({ "picom-trans", "-t", "-w", os.getenv("WINDOWID") })
+	if vim.system({ "picom-trans", "-h" }, nil, nil):wait().code == 0 then
+		vim.system({ "picom-trans", "-t", "-w", os.getenv("WINDOWID") })
 	else
 		vim.notify("Error: picom-trans is not installed on this device.", vim.log.levels.ERROR, nil)
 	end

@@ -34,6 +34,7 @@ local servers = {
 			telemetry = { enable = false },
 			diagnostics = {
 				globals = { "vim", "it", "should", "describe" },
+				diagnostics = { disable = { "missing-fields" } },
 			},
 		},
 	},
