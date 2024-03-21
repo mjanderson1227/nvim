@@ -8,4 +8,7 @@ return {
 			config = true,
 		},
 	},
+	config = function()
+		require("lspconfig").ocamllsp.setup({})
+	end,
 }

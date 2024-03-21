@@ -26,8 +26,6 @@ local servers = {
 	tsserver = {
 		format = true,
 	},
-	ocamllsp = {},
-
 	lua_ls = {
 		Lua = {
 			workspace = { checkThirdParty = false },
