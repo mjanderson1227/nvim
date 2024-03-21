@@ -1,5 +1,5 @@
 return {
-	"andweeb/presence.nvim",
+	"mjanderson1227/presence.nvim",
 	ft = "presence",
 	lazy = false,
 	opts = {
