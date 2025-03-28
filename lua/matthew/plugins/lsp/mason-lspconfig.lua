@@ -15,6 +15,7 @@ local handlers = {
 }
 
 local servers = {
+	intelephense = {},
 	clangd = {},
 	-- gopls = {},
 	pyright = {},
@@ -23,7 +24,7 @@ local servers = {
 			rangeFormatting = { enable = true },
 		},
 	},
-	tsserver = {
+	ts_ls = {
 		format = true,
 	},
 	lua_ls = {
@@ -41,7 +42,6 @@ local servers = {
 			lint = { unknownAtRules = "ignore" },
 		},
 	},
-
 	html = {},
 }
 

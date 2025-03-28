@@ -8,8 +8,8 @@ local function setup_cmp()
 	--- @diagnostic disable-next-line: missing-fields
 	cmp.setup({
 		window = {
-			completion = cmp.config.window.bordered(),
-			documentation = cmp.config.window.bordered(),
+			--completion = cmp.config.window.bordered(),
+			documentation = false, --cmp.config.window.bordered(),
 		},
 		snippet = {
 			expand = function(args)

@@ -3,6 +3,8 @@ vim.g.maplocalleader = " "
 
 vim.opt.guicursor = "sm:block-blinkwait175-blinkoff150-blinkon175"
 
+vim.lsp.set_log_level("TRACE")
+
 vim.o.splitbelow = true
 
 vim.o.hlsearch = false
@@ -33,5 +35,6 @@ vim.o.termguicolors = true
 vim.opt.rtp:append("/Users/matthewanderson1/.opam/default/share/ocp-indent/vim")
 
 vim.o.ts = 2
-
 vim.o.sw = 2
+
+vim.o.mouse = ""
